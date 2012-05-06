@@ -6,7 +6,7 @@ get '/?' do
 end
 
 
-post '/new' do
+post '/action/new' do
   unless session[:token] == params['token']
     flash[:error] = "You're a dick, or possibly you need cookies enabled"
     redirect '/'
@@ -14,9 +14,17 @@ post '/new' do
 
   email = params['email']
   password = params['password']
+  slug = params['slug']
 
-  @user = User.first(:email => email)
+  unless Page.valid_slug(slug)
+    flash[:error] = "That url wasn't allowed... what gives?"
+    redirect '/'
+  end
 
+  @user = User.first(
+    :email => email
+
+  )
   unless @user
     @user = User.new(
       :email => email
@@ -29,14 +37,48 @@ post '/new' do
 
   @page = @user.pages.new(
     :password => BCrypt::Password.create(password),
-    :title => Page.default_title,
-    :slug => Page.generate_slug,
+    :title => Page.make_title(slug),
+    :slug => slug,
     :body => Page.default_body,
+    :message => Page.messages[:new],
   )
   if @user.save
-    redirect "/pages/edit/#{@page.slug}"
+    session[@page.id] = true
+    redirect "/#{@page.slug}"
   else
     flash[:error] = "Something went really wrong"
     redirect '/'
   end
+end
+
+
+get '/:slug/?' do
+  slug = params[:slug]
+  @page = Page.first(:slug => slug)
+  if session[@page.id]
+    if @page.message == Page.messages[:new]
+      @show_intro = true
+    else
+      if (Time.now - page.modified_at) > 2880
+        # reminder if they haven't edited the page for a while...
+        @show_ownership = true
+      end
+    end
+  end
+  erb :'page/wrapper'
+end
+
+
+get '/edit/:slug/?'
+  slug = params[:slug]
+  @page = Page.first(:slug => slug)
+
+end
+
+
+get '/ajax/valid-slug/:slug' do
+  slug = params[:slug]
+  valid = Page.valid_slug(slug)
+  content_type :json
+  { :valid => valid }.to_json
 end
