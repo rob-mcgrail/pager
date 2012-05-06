@@ -4,11 +4,11 @@ class Page
   property :id,               Serial
   property :title,            String,   :length => 3..500, :required => true
   property :slug,             String,   :length => 3..500, :unique => true, :required => true
-  property :created_at,       DateTime
-  property :updated_at,       DateTime
   property :password,         String
-
+  property :state,            String
   property :body,             Text,     :length => 0..100_000, :required => true
+
+  timestamps :at
 
   belongs_to :user, :required => true
 
@@ -18,16 +18,21 @@ class Page
 
 
   def self.default_body
-    'A tutorial of how to use the site would go here' # get this from a template file... / db
+    'This is initial body content. It should act as a tutorial...' # get this from a template file... / db
   end
 
 
   def self.valid_slug(slug)
-    blacklist = ['action', 'ajax', 'about']
-    if Page.first(:slug => slug) || blaclist.include? slug
+    reserved = ['action', 'ajax', 'about', 'edit'].include? slug
+    if reserved || Page.first(:slug => slug)
       nil
     else
       true
     end
+  end
+
+
+  def self.messages
+    {:new => 'new'}
   end
 end
