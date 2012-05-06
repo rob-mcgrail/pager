@@ -23,7 +23,7 @@ group :dev do
 end
 
 group :production do
-
+  gem "dm-mysql-adapter", ">=1.2"
 end
 
 group :test do

@@ -12,7 +12,7 @@ configure :development do
 end
 
 configure :production do
-  set :db, 'sqlite3://' + settings.root + '/db/production.sqlite3'
+  set :db, 'mysql://user:password@hostname/database'
   set :raise_errors, false
   set :show_exceptions, false
 end
