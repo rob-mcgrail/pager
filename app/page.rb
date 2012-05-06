@@ -3,7 +3,7 @@ class Page
 
   property :id,               Serial
   property :title,            String,   :length => 3..500, :required => true
-  property :slug,             String,   :length => 3..500, :unique => true, :required => true
+  property :slug,             String,   :length => 3..200, :unique => true, :required => true
   property :password,         String
   property :state,            String
   property :body,             Text,     :length => 0..100_000, :required => true
