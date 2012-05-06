@@ -1,7 +1,11 @@
 @$ gem install bundler@
 
+@$ gem install rake@
+
 @$ bundle install@
 
-@$ bundle exec rackup -s thin -p 9000@
+@$ rake db:migrate@
+
+@$ rake server@
 
 Visit http://0.0.0.0:9000
