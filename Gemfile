@@ -15,6 +15,7 @@ gem "warden"
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "trollop"
 gem "json"
+gem "mail"
 
 group :dev do
   gem "thin"

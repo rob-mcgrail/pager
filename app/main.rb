@@ -45,6 +45,15 @@ post '/action/new' do
   if @user.save
     session[@page.id] = true
     redirect "/#{@page.slug}"
+    # make this with a helper...
+    mail = Mail.new do
+      from    'noreply@pager.robmcgrail.com'
+      to      email
+      subject 'Your new Pager page!'
+      body    "Edit url: #{slug}\nPassword: #{password}"
+    end
+    mail.delivery_method :exim, :location => "/usr/sbin/exim"
+    mail.deliver
   else
     flash[:error] = "Something went really wrong"
     redirect '/'
