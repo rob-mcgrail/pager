@@ -40,7 +40,7 @@ post '/action/new' do
     :title => Page.make_title(slug),
     :slug => slug,
     :body => Page.default_body,
-    :message => Page.messages[:new],
+    :state => Page.state_names[:new],
   )
   if @user.save
     session[@page.id] = true
@@ -56,7 +56,7 @@ get '/:slug/?' do
   slug = params[:slug]
   @page = Page.first(:slug => slug)
   if session[@page.id]
-    if @page.message == Page.messages[:new]
+    if @page.state == Page.state_names[:new]
       @show_intro = true
     else
       if (Time.now - page.modified_at) > 2880
@@ -68,11 +68,10 @@ get '/:slug/?' do
   erb :'page/wrapper'
 end
 
-
-get '/edit/:slug/?'
+#TODO
+get '/edit/:slug/?' do
   slug = params[:slug]
   @page = Page.first(:slug => slug)
-
 end
 
 

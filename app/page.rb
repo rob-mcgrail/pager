@@ -32,7 +32,7 @@ class Page
   end
 
 
-  def self.messages
+  def self.state_names
     {:new => 'new'}
   end
 end
