@@ -1,0 +1,7 @@
+@$ gem install bundler@
+
+@$ bundle install@
+
+@$ bundle exec rackup -s thin -p 9000@
+
+Visit http://0.0.0.0:9000
