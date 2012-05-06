@@ -1,5 +1,5 @@
 helpers do
-  def title(arg)
-    @title = 'PAGER'
+  def title(arg = nil)
+    @title = arg ? 'pager | ' + arg : @title = 'pager'
   end
 end
