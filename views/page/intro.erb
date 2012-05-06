@@ -1,0 +1,10 @@
+<div id="intro" style="background-color:#cbf;">
+  <h1>Welcome to your new page!</h1>
+  <div class="dismiss" style="float:right;"><a href="#">Dismiss</a></div>
+
+  <p>We've sent some info to <%= @page.user.email %>. If that email was a lie, go <a href="/not-done-yet">here</a> to set a real one.</p>
+
+  <h2>Get creating!</h2>
+  <p>You can edit your page <a href="/edit/<%= @page.slug %>">here</a>.
+  <p>Remember, you need the password we emailed to you.</p>
+</div>

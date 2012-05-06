@@ -1,0 +1,11 @@
+<% if @show_intro %>
+  <%= erb :'page/intro' %>
+<% end %>
+
+<% if @show_ownership %>
+  <%= erb :'page/owner_prompt' %>
+<% end %>
+
+<div id="page-wrapper">
+  <%= @page.body =%>
+</div>
