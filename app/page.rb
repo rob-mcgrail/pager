@@ -12,22 +12,22 @@ class Page
 
   belongs_to :user, :required => true
 
-  def self.default_title
-    'I need a title!'
+  def self.make_title(slug)
+    slug.gsub(/[-|_]/i, ' ').downcase
   end
 
 
   def self.default_body
-    'A tutorial of how to use the site would go here'
+    'A tutorial of how to use the site would go here' # get this from a template file... / db
   end
 
 
-  def self.generate_slug
-    str = String.random
-    if self.first(:slug => str)
-      self.generate_slug
+  def self.valid_slug(slug)
+    blacklist = ['action', 'ajax', 'about']
+    if Page.first(:slug => slug) || blaclist.include? slug
+      nil
     else
-      str
+      true
     end
   end
 end
