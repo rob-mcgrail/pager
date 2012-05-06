@@ -4,5 +4,7 @@ class User
   property :id,               Serial
   property :email,            String,   :format => :email_address
 
+  timestamps :at
+
   has n, :pages
 end
