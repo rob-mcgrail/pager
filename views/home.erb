@@ -1,0 +1,19 @@
+<header>
+  <hgroup>
+    <h1>Welcome to pager</h1>
+    <h2>The imgur of webpages, or something</h2>
+  </hgroup>
+  <p>No accounts, no servers, no facebooks.</p>
+</header>
+
+<div>
+  <p>You're one click away from your own sweet webpage live on the internet...</p>
+  <form id="get-started" action="new" method="post">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" size="25" placeholder="you@gmail.com" required>
+    <label for="passwd">Password for editing your page</label>
+    <input id="passwd" name="passwd" type="password" size="25" required/>
+    <input name="token" value="<%= @csfr_token %>" type="hidden">
+    <input type="submit" name="submit" id="submit" value="Go!"/>
+  </form>
+</div>
