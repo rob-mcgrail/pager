@@ -3,7 +3,12 @@ source :rubygems
 gem "sinatra"
 gem "sinatra-static-assets"
 gem "sinatra-flash"
-gem "datamapper"
+
+gem "dm-core"
+gem "dm-timestamps"
+gem "dm-validations"
+gem "dm-migrations"
+
 gem "erubis"
 gem "redcarpet"
 gem "warden"
@@ -23,4 +28,5 @@ group :test do
   gem "minitest", :platforms => :mri_18
   gem "minitest-colorize"
   gem "webmock"
+  gem "dm-sweatshop"
 end
