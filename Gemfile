@@ -1,7 +1,6 @@
 source :rubygems
 
 gem "sinatra"
-gem "sinatra-static-assets"
 gem "sinatra-flash"
 
 gem "dm-core", ">=1.2"
