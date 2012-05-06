@@ -5,14 +5,15 @@ get '/?' do
   erb :home
 end
 
+
 post '/new' do
   unless session[:token] == params['token']
     flash[:error] = "You're a dick, or possibly you need cookies enabled"
     redirect '/'
   end
 
-  email = params[:email]
-  password params[:password]
+  email = params['email']
+  password = params['password']
 
   @user = User.first(:email => email)
 
@@ -27,12 +28,12 @@ post '/new' do
   end
 
   @page = @user.pages.new(
-    :password => password.encrypt,
+    :password => BCrypt::Password.create(password),
     :title => Page.default_title,
     :slug => Page.generate_slug,
     :body => Page.default_body,
   )
-  if @page.save
+  if @user.save
     redirect "/pages/edit/#{@page.slug}"
   else
     flash[:error] = "Something went really wrong"
