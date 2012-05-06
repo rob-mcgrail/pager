@@ -2,7 +2,7 @@
 
 class String
   def self.random
-    (0...8).map{65.+(rand(25)).chr}.join
+    (0...15).map{65.+(rand(25)).chr}.join.downcase
   end
 
   def parameterize(delimeter = '-')
