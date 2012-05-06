@@ -1,6 +1,5 @@
 configure do
   set :method_override, true # For HTTP verbs
-  set :sessions, true
   set :logging, false # stops annoying double log messages.
   set :static, false # see config.ru for dev mode static file serving
 end
@@ -23,6 +22,12 @@ end
 if settings.development?
   use Rack::Static, :urls => settings.static_paths, :root => "public"
 end
+
+use Rack::Session::Cookie, :key => 'pager.session',
+                           :path => '/',
+                           :expire_after => 2592000, # In seconds
+                           :secret => 'change_me_in_production'
+
 
 # Authentication middleware
 # https://github.com/hassox/warden/wiki/overview
