@@ -8,11 +8,18 @@
 
 <div>
   <p>You're one click away from your own sweet webpage live on the internet...</p>
-  <form id="get-started" action="new" method="post">
-    <label for="email">Email</label>
+  <form id="get-started" action="action/new" method="post">
+    <label for="slug">Enter the url for your page!</label><br />
+    <input id="slug" name="slug" type="text" size="40" placeholder="everything-is-awesome" required>
+    <br />
+    <!-- /ajax/valid-slug/whatever-they-entered will return a {"valid":true} or nil... -->
+    <br />
+    <label for="password">And a password for editing it</label><br />
+    <input id="password" name="password" type="password" size="25" placeholder="password" required/>
+    <br /><br />
+    <label for="email">And an email in case you forget it</label><br />
     <input id="email" name="email" type="email" size="25" placeholder="you@gmail.com" required>
-    <label for="password">Password for editing your page</label>
-    <input id="password" name="password" type="password" size="25" required/>
+    <br /><br />
     <input name="token" value="<%= @csfr_token %>" type="hidden">
     <input type="submit" name="submit" id="submit" value="Go!"/>
   </form>
