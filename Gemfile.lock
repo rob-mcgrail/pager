@@ -25,6 +25,7 @@ GEM
       data_objects (= 0.10.8)
     erubis (2.7.0)
     eventmachine (0.12.10)
+    json (1.6.5)
     minitest (2.12.1)
     minitest-colorize (0.0.4)
       minitest (~> 2.0)
@@ -64,6 +65,7 @@ DEPENDENCIES
   dm-timestamps (>= 1.2)
   dm-validations (>= 1.2)
   erubis
+  json
   minitest
   minitest-colorize
   redcarpet

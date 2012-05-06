@@ -15,6 +15,7 @@ gem "redcarpet"
 gem "warden"
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "trollop"
+gem "json"
 
 group :dev do
   gem "thin"
