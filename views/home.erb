@@ -11,8 +11,8 @@
   <form id="get-started" action="new" method="post">
     <label for="email">Email</label>
     <input id="email" name="email" type="email" size="25" placeholder="you@gmail.com" required>
-    <label for="passwd">Password for editing your page</label>
-    <input id="passwd" name="passwd" type="password" size="25" required/>
+    <label for="password">Password for editing your page</label>
+    <input id="password" name="password" type="password" size="25" required/>
     <input name="token" value="<%= @csfr_token %>" type="hidden">
     <input type="submit" name="submit" id="submit" value="Go!"/>
   </form>
