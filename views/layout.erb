@@ -23,15 +23,7 @@
 <body>
 
   <div id="container">
-    <header>
-      <%= erb :header %>
-    </header>
-    <div id="main" role="main">
-      <%= yield if block_given? %>
-    </div>
-    <footer>
-      <%= erb :footer %>
-    </footer>
+    <%= yield if block_given? %>
   </div> <!-- eo #container -->
 
 
