@@ -15,10 +15,11 @@ gem "warden"
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "trollop"
 gem "json"
-gem "mail"
+gem "pony"
 
 group :dev do
-  gem "thin"
+  gem "mongrel", :platforms => :mri_18
+  gem "puma"
   gem "dm-sqlite-adapter", ">=1.2"
 end
 
