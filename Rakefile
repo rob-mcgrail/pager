@@ -33,7 +33,7 @@ namespace :db do
 end
 
 task :server do
-  system("bundle exec rackup -p 9000 -s puma")
+  system("bundle exec rackup -p 8000 -s puma")
 end
 
 task :install do

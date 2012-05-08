@@ -1,4 +1,4 @@
-get '/?' do
+get '/' do
   title 'welcome!'
   @csfr_token = String.random
   session[:token] = @csfr_token
@@ -45,15 +45,23 @@ post '/action/new' do
   if @user.save
     session[@page.id] = true
     redirect "/#{@page.slug}"
-    # make this with a helper...
-    mail = Mail.new do
-      from    'noreply@pager.robmcgrail.com'
-      to      email
-      subject 'Your new Pager page!'
-      body    "Edit url: #{slug}\nPassword: #{password}"
-    end
-    mail.delivery_method :exim, :location => "/usr/sbin/exim"
-    mail.deliver
+#    Pony.mail(
+#      :to => email,
+#      :from => 'noreply@pager.robmcgrail.com',
+#      :subject => 'Your new Pager page!',
+#      :body => "Edit url: #{slug}\nPassword: #{password}",
+#      :via => :sendmail
+#    )
+#   Mail.defaults do
+#       delivery_method :exim, :location => "/usr/sbin/exim"
+#     end
+#    mail = Mail.new do
+#      from     'rob@aichi.com'
+#      to       email
+#      subject  'Here is the image you wanted'
+#      body     'abc'
+#    end
+#    mail.deliver
   else
     flash[:error] = "Something went really wrong"
     redirect '/'
@@ -61,21 +69,6 @@ post '/action/new' do
 end
 
 
-get '/:slug/?' do
-  slug = params[:slug]
-  @page = Page.first(:slug => slug)
-  if session[@page.id]
-    if @page.state == Page.state_names[:new]
-      @show_intro = true
-    else
-      if (Time.now - page.modified_at) > 2880
-        # reminder if they haven't edited the page for a while...
-        @show_ownership = true
-      end
-    end
-  end
-  erb :'page/wrapper'
-end
 
 #TODO
 get '/edit/:slug/?' do
@@ -89,4 +82,26 @@ get '/ajax/valid-slug/:slug' do
   valid = Page.valid_slug(slug)
   content_type :json
   { :valid => valid }.to_json
+end
+
+#get '/', :host_name => /^admin\./ do
+
+
+get '/:slug' do
+  slug = params[:slug]
+  if @page = Page.first(:slug => slug)
+    if session[@page.id]
+      if @page.state == Page.state_names[:new]
+        @show_intro = true
+      else
+        if (Time.now - page.modified_at) > 2880
+          # reminder if they haven't edited the page for a while...
+          @show_ownership = true
+        end
+      end
+    end
+    erb :'page/wrapper'
+  else
+    404
+  end
 end

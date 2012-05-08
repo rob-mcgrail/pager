@@ -1,6 +1,6 @@
 # Over-riding a warning about #options being deprecated.
 #
-# Some library is calling #options still. 
+# Some library is calling #options still.
 # Check some time in the future that this is
 # still the case.
 
@@ -16,5 +16,15 @@ end
 
 class Object
   def id
+  end
+end
+
+class Mail::Exim
+  def self.call(path, arguments, destinations, mail)
+    puts '!!!!!!!!!!!!!!!'
+    IO.popen("#{path} #{arguments}", "w+") do |io|
+      io.puts mail.encoded.to_lf
+      io.flush
+    end
   end
 end
