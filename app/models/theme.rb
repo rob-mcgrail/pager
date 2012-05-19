@@ -1,7 +1,7 @@
 class Theme
   include DataMapper::Resource
   property :id,               Serial
-  property :name,             String, :required => true
+  property :name,             String, :required => true, :unique => true
   property :css,              Text,   :length => 0..100_000, :required => true
 
   timestamps :at
