@@ -56,13 +56,7 @@ task :themes do
     end
   end
   Dir['./assets/themes/*.css'].each do |path|
-    theme = File.new(path)
-    name = 'Hello'#Theme.extract_name(theme)
-    css = Theme.extract_css(theme)
-    @theme = Theme.new(
-      :name => name,
-      :css => css,
-    )
+    @theme = Theme.ingest_file(File.new(path))
     unless @theme.save
       raise "Failed to save theme #{@theme.id} #{@theme.name}"
     end

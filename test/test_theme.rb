@@ -16,6 +16,14 @@ class TestTheme < MiniTest::Unit::TestCase
   end
 
 
+  def test_ingest_file_returns_theme
+    theme = Theme.ingest_file(File.new('./test/mocks/test.css'))
+    assert_kind_of Theme, theme
+    assert_equal 'Testing', theme.name
+    assert_kind_of String, theme.css
+  end
+
+
   def test_default_returns_a_theme
     theme = Theme.default
     assert_kind_of Theme, theme

@@ -15,6 +15,16 @@ class Theme
   end
 
 
+  def self.ingest_file(file)
+    Theme.new(
+      :name => self.extract_name(file),
+      :css => self.extract_css(file)
+    )
+  end
+
+
+  private
+
   def self.extract_name(file)
     str = file.read
     file.rewind
