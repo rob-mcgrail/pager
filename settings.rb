@@ -1,6 +1,6 @@
 configure do
   set :method_override, true # For HTTP verbs
-  set :logging, false # stops annoying double log messages.
+  set :logging, false # stops annoying double requests.
   set :static, false # see config.ru for dev mode static file serving
   set :asset_timestamps, false
 end
@@ -18,6 +18,10 @@ configure :production do
   set :show_exceptions, false
 end
 
+configure :test do
+  set :db, 'sqlite3://' + settings.root + '/db/test.sqlite3'
+end
+
 # Rack configuration
 # Serve static files in dev
 if settings.development?
@@ -32,14 +36,13 @@ use Rack::Session::Cookie, :key => 'pager.session',
 
 # Authentication middleware
 # https://github.com/hassox/warden/wiki/overview
-use Warden::Manager do |mgmt|
-  mgmt.default_strategies :password
-  mgmt.failure_app = Sinatra::Application
-end
+#use Warden::Manager do |mgmt|
+#  mgmt.default_strategies :password
+#  mgmt.failure_app = Sinatra::Application
+#end
 
 
 # Database
 # http://datamapper.rubyforge.org/dm-core/DataMapper.html
 DataMapper.setup(:default, settings.db)
 DataMapper::Property::String.length(255)
-DataMapper::Logger.new($stdout, :info) if settings.development?

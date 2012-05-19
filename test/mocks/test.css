@@ -1,0 +1,9 @@
+Testing
+/* first line in a theme is it's name. $ rake themes to upate themes in the db from these files */
+body {
+  font-family: Helvetica;
+}
+
+p {
+  color:green;
+}

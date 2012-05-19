@@ -1,0 +1,24 @@
+<form id="startup" action="action/new" method="post">
+
+  <label for="path">
+    <span class="step-number" id="step-1">1</span>
+    Choose your address
+  </label>
+  <br />
+
+  <input id="path" name="path" type="text" size="40" placeholder="your-page" required>
+  <br />
+
+  <label for="password">
+    <span class="step-number" id="step-2">2</span>
+    Set a password for managing your page
+  </label>
+  <br />
+
+  <input id="password" name="password" type="password" size="40" placeholder="******" required/>
+  <br />
+
+  <input name="token" value="<%= @csfr_token %>" type="hidden">
+
+  <input type="submit" name="submit" id="submit" value="Create page"/>
+</form>

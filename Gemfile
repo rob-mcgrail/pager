@@ -2,6 +2,7 @@ source :rubygems
 
 gem "sinatra"
 gem "sinatra-flash"
+gem "sinatra-subdomain"
 
 gem "dm-core", ">=1.2"
 gem "dm-do-adapter", ">=1.2"
@@ -31,4 +32,5 @@ group :test do
   gem "minitest", :platforms => :mri_18
   gem "minitest-colorize"
   gem "webmock"
+  gem "dm-sweatshop"
 end

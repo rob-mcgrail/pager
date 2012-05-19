@@ -6,5 +6,5 @@ class User
 
   timestamps :at
 
-  has n, :pages
+  has n, :pages, :required => false
 end
